@@ -1,44 +1,49 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { dir } = require('console');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const config = {
+module.exports = {
+    devServer: {
+        static: {
+            directory: path.join(__dirname, './')
+        },
+        hot: true,
+        port: 5500,
+    },
+    mode: "development",
   entry: [
     path.resolve(__dirname, 'src', 'index.js'),
-    path.resolve(__dirname, 'src', 'index.css')
+    path.resolve(__dirname, 'src', 'index.scss')
   ],
   output: {
-    path: path.join(__dirname, 'dist'), // bundled file in dist/
+    path: path.join(__dirname, 'dist'), 
     filename: '[name].js'
   },
   module: {
     rules: [
       {
-        test: /\.js$/, // applies to js files
-        use: ['babel-loader'], // transpiles your js
-        exclude: /node_modules/, // don't transpile node modules
+        test: /\.js$/, 
+        use: ['babel-loader'], 
+        exclude: /node_modules/, 
       },
       {
-        test: /\.s?[ac]ss$/, // applies to css/scss/sass files
+        test: /\.s?[ac]ss$/, 
         use: [
-          MiniCssExtractPlugin.loader, // create bundled css file
+          MiniCssExtractPlugin.loader, 
           {
-            loader: 'css-loader', // resolves @import statements
-            options: { url: false } // don't resolve url() statements
+            loader: 'css-loader', 
+            options: { url: false } 
           },
-          'sass-loader', // compiles sass to css
+          'sass-loader', 
         ]
       }
     ]
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  , new MiniCssExtractPlugin()].filter(Boolean),
+  target: 'web'
 };
-
-module.exports = (env, argv) => {
-  if (argv.mode === 'production') {
-    config.devtool = 'source-map';
-  } else {
-    config.devtool = 'eval-source-map';
-  }
-
-  return config;
-}
