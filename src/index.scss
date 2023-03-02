@@ -1,5 +1,20 @@
 *{
-    background-color: red;
-    font-size: 40px;
-    color: green($color: #000000);
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+#title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+#canvas{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
