@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = window.innerHeight
     
     const vines = [];
-    for( let i = 0; i < 10; i++){
+    for( let i = 0; i < 100; i++){
         vines.push(new Vine(canvas))
     }
     vines.forEach(vine => vine.draw(ctx))
