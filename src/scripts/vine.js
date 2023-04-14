@@ -30,18 +30,33 @@ export default class Vine {
     this.color = `hsla(${this.h}, ${this.s}%, ${this.l}%)`
   }
 
-  draw(context, dimension, color) {
+  draw(context, dimension, color, pos) {
     context.fillStyle = color
-    context.fillRect(this.x, this.y, dimension, dimension)
+    context.fillRect(pos[0], pos[1], dimension, dimension)
     this.shade(dimension)
   }
 
   shade(dim){
-    while(dim > 0){
+    while(dim > 2){
       dim -= 2
       let mod = 10 - Math.abs(dim - 10)
-      this.draw(this.ctx, dim, `hsla(${this.h - mod}, ${this.s - mod}%, ${this.l - mod}%)`)
-    }
+      let color 
+      switch(mod){
+        case 8:
+          color = 'red'
+          break;
+        case 6:
+          color = 'blue'
+          break;
+        case 4:
+          color = 'white'
+          break;
+        case 2:
+          color = 'black'
+          break;
+      }
+      console.log(color, mod)
+      this.draw(this.ctx, dim, color, [this.x + Math.floor(8 / mod), this.y + Math.floor(8 / mod)]) }
   }
 
   grow() {
