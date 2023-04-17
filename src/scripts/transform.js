@@ -16,14 +16,16 @@ export default function transform(currChar, nextChar, ctx, transformed) {
   //   }
   // }
  
-
+  console.log(currChar.data)
   // create circle around center pixel
-  let centerPixel = currChar.data.length / 2
+  let i = currChar.data.length / 2
   
-  currChar.data[centerPixel] = 255
-  currChar.data[centerPixel + 1] = 0
-  currChar.data[centerPixel + 2] = 0
-  currChar.data[centerPixel + 3] = 1
+    currChar.data[i] = 255
+    currChar.data[i + 1] = 0
+    currChar.data[i + 2] = 0 
+    currChar.data[i + 3] = 255
+
+
 
   // blast outwards
 
